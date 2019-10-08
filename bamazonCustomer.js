@@ -7,4 +7,17 @@ var connection = mysql.createConnection({
     user: "root",
     password: "Lolafitz",
     database: "bamazon"
+});
+
+connection.connect(function(err) {
+    if (err) throw err;
+    readBamazon();
 })
+
+function readBamazon(){
+    connection.query("SELECT id, product_name, price FROM products", function(err, res){
+        if (err) throw err;
+
+        console.log(res);
+    })
+};
