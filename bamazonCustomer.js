@@ -1,11 +1,12 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+require("dotenv").config();
 
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Lolafitz",
+    password: process.env.DB_PASSWORD,
     database: "bamazon"
 });
 
@@ -32,9 +33,9 @@ function startBamazon(){
 function purchase(){
     inquirer.prompt([
         {
-        type: "list",
+        type: "input",
         name: "rawList",
-        message: "What is the ID of the product you would like to buy?",
+        message: "Select an id number of the product you would like to purchase" + ".\n",
         choices:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
         {
