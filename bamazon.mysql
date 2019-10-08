@@ -1,0 +1,14 @@
+DROP DATABASE IF EXISTS bamazon;
+CREATE DATABASE bamazon;
+USE bamazon;
+
+CREATE TABLE products(
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(75) NOT NULL,
+    department_name VARCHAR(75) NOT NULL,
+    price DECIMAL(13,2),
+    stock_quantity INTEGER NULL
+);
+
+INSERT INTO products(product_name, department_name, price, stock_quantity)
+VALUES("tortilla blanket", )
