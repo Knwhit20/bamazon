@@ -11,4 +11,5 @@ CREATE TABLE products(
 );
 
 INSERT INTO products(product_name, department_name, price, stock_quantity)
-VALUES("tortilla blanket", )
+VALUES("tortilla blanket", "home", 24.99, 499), ("wine mug", "home", 12.00, 75), ("cooling pet bowl", "pet", 8.99, 225), ("dog collar", "pet", 34.00, 28), ("Fern plant", "outdoor", 9.99, 10), ("unicorn", "home", 495, 500), ("longhorn shirt", "clothing", 20, 50), ("backpack", "adventure", 125.00, 3), ("hiking poles", "adventure", 75.75, 75), ("stapler", "office", 11.95, 99999);
+SELECT * FROM products
