@@ -12,20 +12,21 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    startBamazon();
+    displayProducts();
     purchase();
 })
 
-function startBamazon(){
-    connection.query("SELECT id, product_name, price FROM products", function(err, res){
+function displayProducts(){
+    connection.query("SELECT * FROM products", function(err, res){
         if (err) throw err;
 
         // console.log(res);
         for (var i = 0; i < res.length; i++){
-            console.log("Id: " + res[i].id +  " || Product: " + res[i].product_name + " || Price: " + res[i].price);
+            console.log("Id: " + res[i].id +  " || Product: " + res[i].product_name + " || Price: " + res[i].price + "|| Quantity: " + res[i].stock_quantity);
            
            
-        }
+        };
+        purchase(res);
     })
 };
 
@@ -34,18 +35,47 @@ function purchase(){
     inquirer.prompt([
         {
         type: "input",
-        name: "rawList",
+        name: "ID",
         message: "Select an id number of the product you would like to purchase" + ".\n",
-        choices:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        // validate: function(value) {
+        //     if (isNaN(value) === false) {
+        //         return "true";
+        //     }
+        //     return false;
+        // },
+
         },
         {
         type: "input",
-        name: "numUnits",
+        name: "quantity",
         message: "How many units would you like to purchase?",
+            // validate: function(value) {
+            //     if (isNaN(value) === false) {
+            //         return true;
+            //     }
+            //     return false;
+            // },
         
         }
-    ]).then(function(){
-        console.log("congrats you purchased something!")
+    ]).then(function(res) {
+        // console.log(res);
+        console.log("checking inventory");
+        var id = res.id;
+        var quantity = res.quantity
+
+        // check if enough quantity exists to fulfill order
+        if (stock_quantity >= quantity) {
+            console.log("fill order")
+
+        }
+        //if not enough quantity exists, log insufficient quantity
+        else {
+            console.log("Insufficient quantity, unable to place order")
+        }
+
+        // if quantity available, fulfill the order
+        //update new quantity of item
+        //show customer the total cost of their purchase
     })
 
 }
