@@ -26,12 +26,14 @@ function displayProducts(){
            
            
         };
-       purchase(res)
+       purchase()
+
+
     });
 };
 
 //creates two prompts, 1. asks the user to select the id of the product they want to buy; 2. asks how many of the product they would like to buy
-function purchase(inventory){
+function purchase(){
     inquirer.prompt([
         {
         type: "input",
@@ -42,7 +44,7 @@ function purchase(inventory){
                 return true;
             }
             return false;
-        },
+        }
 
         },
         {
@@ -59,39 +61,45 @@ function purchase(inventory){
         }
     ]).then(function(answer) {
         console.log(answer);
-        // var chosenProduct;
-        var chosenItem;
-        for (var i = 0; i < inventory.length; i++) {
-            if (inventory[i].id === answer.item_id) {
-                chosenItem = answer.item_id;
+        
+        var chosenItem = answer.item_id
+        // console.log(chosenItem);
+        var quantity = answer.quantity
+        // console.log(quantity);
+        
+        connection.query("SELECT id, stock_quantity FROM products", function(err, res) {
+            if (err) throw err;
+            
+            for (var i = 0; i < res.length; i++){
+            // console.log(res[i]);
+            // console.log(res[i].id);
+            if (parseInt(chosenItem) === res[i].id){
+                var stock = res[i].stock_quantity;
+                console.log(stock);
                 console.log(chosenItem);
             }
+           
         }
+            if (quantity <= stock) {
+                console.log("order fulfilled")
+                connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?" ,[quantity, chosenItem], 
+                    function (err) {
+                        if (err) throw err;
+
+                        console.log("Thank you for purchasing!")
+                        
+
+                    })
+            }
+            else ( 
+                console.log("sorry not enough in stock")
+            )
+        })   
+
       
-        
-            for (var i = 0; i < inventory.length; i++) {
-                if (inventory[i].id === parseInt(answer.item_id)) {
-                    chosenproduct = inventory[i];
-                    console.log(chosenProduct);
-                    // console.log(chosenProduct.quantity)
-                }
-            }; if (!chosenProduct) {
-                console.log("Please choose a valid product ID");
-            };
-    
     
 
-        // //use id.quantity to see if enough inventory exists
-        // if (chosenProduct){
-        //     if chosenProduct.stock_quantity >= parseInt(answer.quantity){
-        //         connection.query("UPDATE products SET stock_quantity = stock_quantity - "?"WHERE id = "?", [answer.quantity, chosenProduct.id], 
-        //         function (err) {
-        //             if (err) throw err;
-        //             console.log("Thank you for purchasing")
-        //         })
-        //     }
-        // }
-
+     
 
     })
 
