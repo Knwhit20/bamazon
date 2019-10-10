@@ -63,4 +63,17 @@ Insufficient quantity demo
 ![Image of insufficient  quantity of item to place order](images/insufficient_quantity.png)
 
 
+Switch statements code
+![Image of switch statements](images/switch_statements.png)
+
+
+Logic: Confirm enough stock exists to fulfill order. If stock exists, the order is filled, total price provided to user and stock quantity updated.  If not enough of product is available, message to the console "not enough exists"
+![image of order logic](images/logic_code.png)
+
+
+End program 
+![Image of program end](images/end_program.png)
+
+
+
 

@@ -93,6 +93,7 @@ function purchase() {
 
                             console.log("Your total price is $" + total);
                             console.log("Thank you for purchasing!")
+                            startover();
 
                         })
             }
@@ -105,6 +106,7 @@ function purchase() {
         
             } else {
                 console.log("Please select a valid product ID")
+                startover();
             }
             
         })
@@ -114,20 +116,25 @@ function purchase() {
 }
 
 
-// function startover() {
-//     inquirer.prompt([
-//         {
-//             type: "confirm",
-//             name: "startover",
-//             message: "Would you like to purchase something else?",
-//             default: true
-//         }
+function startover() {
+    inquirer.prompt([
+        {
+             type: "confirm",
+            name: "startover",
+            message: "Would you like to purchase something else?",
+        },
 
-//     ]).then(function() {
-//         if (confirm) {
-//             displayProducts();
-//         }
-//         else (end());
-//     });
-// }
+    ]).then(function(answer){
+        
+        if (answer === "true") {
+            displayProducts() 
+            
+        }
+        else {
+            connection.end()
+            console.log("Have a good day!");
+           
+        } 
+    });
+}
   
