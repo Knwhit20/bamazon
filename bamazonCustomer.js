@@ -80,8 +80,14 @@ function purchase() {
                     // console.log(chosenItem);
                 }
                 //write else statement to log "enter valid ID"
+                if (parseInt(chosenItem) !== res[i].id) {
+                    console.log("Please select a valid product ID")
+                    startover()
+                }
+
             }
-        
+
+
 
             if (quantity <= stock) {
                 console.log("Order fulfilled")
@@ -93,20 +99,31 @@ function purchase() {
 
                         console.log("Your total price is $" + total);
                         console.log("Thank you for purchasing!")
+                        startover()
 
 
                     })
             }
             else (
                 console.log("sorry not enough in stock")
-            )
+                
+            );
         })
-
-
-
-
-
 
     })
 
+}
+
+function startover() {
+    inquirer.prompt([
+        {
+            type: "confirm",
+            name: "startover",
+            message: "Would you like to purchase something else?",
+            default: true
+        }
+
+    ])
+
+    displayProducts();
 }
