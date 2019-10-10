@@ -44,7 +44,7 @@ Node.Js
 MySQL Workbench
 
 Connect Node.js with MySQL database
-![Image of mySQL connection](images/Connect_MYSQL.png)
+![Image of mySQL connection](images/Connect_MySQL.png)
 
 
 Product Display of all items available for sale. Includes id, name, department, price and quantity
