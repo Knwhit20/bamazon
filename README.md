@@ -60,7 +60,7 @@ Inventory updated: Stapler quantity updated after 1000 staplers purchased
 
 
 Insufficient quantity demo
-![Image of insufficient  quantity of item to place order](images/insufficuent_quantity.png)
+![Image of insufficient  quantity of item to place order](images/insufficient_quantity.png)
 
 
 
