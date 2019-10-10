@@ -10,96 +10,102 @@ var connection = mysql.createConnection({
     database: "bamazon"
 });
 
-connection.connect(function(err) {
+connection.connect(function (err) {
     if (err) throw err;
     displayProducts();
-    
+
 });
 
-function displayProducts(){
-    connection.query("SELECT * FROM products", function(err, res){
+function displayProducts() {
+    connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
 
         // console.log(res);logs all results
-        for (var i = 0; i < res.length; i++){
-            console.log("Id: " + res[i].id +  " | " + "Product: " + res[i].product_name + " | " + "Department: " + res[i].department_name + " | " + "Price: " + res[i].price + " | " + "Quantity: " + res[i].stock_quantity);
-           
-           
+        for (var i = 0; i < res.length; i++) {
+            console.log("Id: " + res[i].id + " | " + "Product: " + res[i].product_name + " | " + "Department: " + res[i].department_name + " | " + "Price: " + res[i].price + " | " + "Quantity: " + res[i].stock_quantity);
+
+
         };
-       purchase()
+        purchase()
 
 
     });
 };
 
 //creates two prompts, 1. asks the user to select the id of the product they want to buy; 2. asks how many of the product they would like to buy
-function purchase(){
+function purchase() {
     inquirer.prompt([
         {
-        type: "input",
-        name: "item_id",
-        message: "Select an id number of the product you would like to purchase" + ".\n",
-        validate: function(value) {
-            if (isNaN(value) === false) {
-                return true;
+            type: "input",
+            name: "item_id",
+            message: "Select an id number of the product you would like to purchase" + ".\n",
+            validate: function (value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
             }
-            return false;
-        }
 
         },
         {
-        type: "input",
-        name: "quantity",
-        message: "How many units would you like to purchase?",
-        validate: function(value) {
+            type: "input",
+            name: "quantity",
+            message: "How many units would you like to purchase?",
+            validate: function (value) {
                 if (isNaN(value) === false) {
                     return true;
                 }
                 return false;
             },
-        
+
         }
-    ]).then(function(answer) {
+    ]).then(function (answer) {
         console.log(answer);
-        
+
         var chosenItem = answer.item_id
         // console.log(chosenItem);
         var quantity = answer.quantity
         // console.log(quantity);
-        
-        connection.query("SELECT id, stock_quantity FROM products", function(err, res) {
+
+        connection.query("SELECT id, price, stock_quantity FROM products", function (err, res) {
             if (err) throw err;
-            
-            for (var i = 0; i < res.length; i++){
-            // console.log(res[i]);
-            // console.log(res[i].id);
-            if (parseInt(chosenItem) === res[i].id){
-                var stock = res[i].stock_quantity;
-                console.log(stock);
-                console.log(chosenItem);
+
+            for (var i = 0; i < res.length; i++) {
+                // console.log(res[i]);
+                // console.log(res[i].id);
+                if (parseInt(chosenItem) === res[i].id) {
+                    var stock = res[i].stock_quantity;
+                    var price = res[i].price;
+                    console.log(stock);
+                    console.log(chosenItem);
+                }
+                //write else statement to log "enter valid ID"
             }
-           
-        }
+        
+
             if (quantity <= stock) {
                 console.log("order fulfilled")
-                connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?" ,[quantity, chosenItem], 
+                connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?", [quantity, chosenItem],
                     function (err) {
                         if (err) throw err;
+                        //total displayed to user, price multiplied by the quantity
+                        var total = (price * quantity).toFixed(2);
 
+                        console.log("Your total price is $" + total);
                         console.log("Thank you for purchasing!")
-                        
+
 
                     })
             }
-            else ( 
+            else (
                 console.log("sorry not enough in stock")
             )
-        })   
+        })
 
-      
-    
 
-     
+
+
+
 
     })
 
