@@ -44,34 +44,42 @@ Node.Js
 MySQL Workbench
 
 Connect Node.js with MySQL database
+
 ![Image of mySQL connection](images/Connect_MySQL.png)
 
 
 Product Display of all items available for sale. Includes id, name, department, price and quantity
+
 ![Image of product display in the console](images/display_products.png)
 
 
-Purchase item demo: Id 10, 1000 staplers  purchased
+Purchase item demo: id=10, 1000 staplers purchased
+
 ![Image of stapler purchase in console](images/purchase_stapler.png)
 
 
 Inventory updated: Stapler quantity updated after 1000 staplers purchased
+
 ![Image of updated stapler quantity after order placed](images/stapler_inventory_updated.png)
 
 
 Insufficient quantity demo
+
 ![Image of insufficient  quantity of item to place order](images/insufficient_quantity.png)
 
 
-Switch statements code
+Switch statements:
+
 ![Image of switch statements](images/switch_statements.png)
 
 
 Logic: Confirm enough stock exists to fulfill order. If stock exists, the order is filled, total price provided to user and stock quantity updated.  If not enough of product is available, message to the console "not enough exists"
+
 ![image of order logic](images/logic_code.png)
 
 
 End program 
+
 ![Image of program end](images/end_program.png)
 
 
