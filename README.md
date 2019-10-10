@@ -51,7 +51,16 @@ Product Display of all items available for sale. Includes id, name, department, 
 ![Image of product display in the console](images/display_products.png)
 
 
+Purchase item demo: Id 10, 1000 staplers  purchased
+![Image of stapler purchase in console](images/purchase_stapler.png)
 
+
+Inventory updated: Stapler quantity updated after 1000 staplers purchased
+![Image of updated stapler quantity after order placed](images/stapler_inventory_updated.png)
+
+
+Insufficient quantity demo
+![Image of insufficient  quantity of item to place order](images/insufficuent_quantity.png)
 
 
 

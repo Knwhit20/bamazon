@@ -60,7 +60,7 @@ function purchase() {
 
         }
     ]).then(function (answer) {
-        console.log(answer);
+        // console.log(answer);
 
         var chosenItem = answer.item_id
         // console.log(chosenItem);
@@ -76,15 +76,15 @@ function purchase() {
                 if (parseInt(chosenItem) === res[i].id) {
                     var stock = res[i].stock_quantity;
                     var price = res[i].price;
-                    console.log(stock);
-                    console.log(chosenItem);
+                    // console.log(stock);
+                    // console.log(chosenItem);
                 }
                 //write else statement to log "enter valid ID"
             }
         
 
             if (quantity <= stock) {
-                console.log("order fulfilled")
+                console.log("Order fulfilled")
                 connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?", [quantity, chosenItem],
                     function (err) {
                         if (err) throw err;
