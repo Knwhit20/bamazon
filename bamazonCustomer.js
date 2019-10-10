@@ -69,61 +69,65 @@ function purchase() {
 
         connection.query("SELECT id, price, stock_quantity FROM products", function (err, res) {
             if (err) throw err;
-
+            var item;
             for (var i = 0; i < res.length; i++) {
                 // console.log(res[i]);
                 // console.log(res[i].id);
                 if (parseInt(chosenItem) === res[i].id) {
-                    var stock = res[i].stock_quantity;
-                    var price = res[i].price;
-                    // console.log(stock);
-                    // console.log(chosenItem);
+                     item = res[i]
                 }
-                //write else statement to log "enter valid ID"
-                if (parseInt(chosenItem) !== res[i].id) {
-                    console.log("Please select a valid product ID")
-                    startover()
-                }
-
-            }
-
-
-
-            if (quantity <= stock) {
-                console.log("Order fulfilled")
-                connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?", [quantity, chosenItem],
-                    function (err) {
-                        if (err) throw err;
-                        //total displayed to user, price multiplied by the quantity
-                        var total = (price * quantity).toFixed(2);
-
-                        console.log("Your total price is $" + total);
-                        console.log("Thank you for purchasing!")
-                        startover()
-
-
-                    })
-            }
-            else (
-                console.log("sorry not enough in stock")
+            } 
+            if(item){
+                var stock = item.stock_quantity;
+                var price = item.price;
+                // console.log(stock);
+                // console.log(chosenItem);
                 
-            );
+                if (quantity <= stock) {
+                    console.log("Order fulfilled")
+                    connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?", [quantity, chosenItem],
+                        function (err) {
+                            if (err) throw err;
+                            //total displayed to user, price multiplied by the quantity
+                            var total = (price * quantity).toFixed(2);
+
+                            console.log("Your total price is $" + total);
+                            console.log("Thank you for purchasing!")
+
+                        })
+            }
+        
+           
+            else {
+                console.log("sorry not enough in stock")
+
+            }
+        
+            } else {
+                console.log("Please select a valid product ID")
+            }
+            
         })
 
     })
 
 }
 
-function startover() {
-    inquirer.prompt([
-        {
-            type: "confirm",
-            name: "startover",
-            message: "Would you like to purchase something else?",
-            default: true
-        }
 
-    ])
+// function startover() {
+//     inquirer.prompt([
+//         {
+//             type: "confirm",
+//             name: "startover",
+//             message: "Would you like to purchase something else?",
+//             default: true
+//         }
 
-    displayProducts();
-}
+//     ]).then(function() {
+//         if (confirm) {
+//             displayProducts();
+//         }
+//         else (end());
+//     });
+// }
+  
