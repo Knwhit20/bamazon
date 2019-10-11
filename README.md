@@ -80,6 +80,11 @@ Logic: Confirm enough stock exists to fulfill order. If stock exists, the order 
 ![image of order logic](images/logic_code.png)
 
 
+Start over function: the user is prompted if they would like to continue shopping, if they select yes, then the function startover is called
+
+![image of startover function working in the browser](images/startover.png)
+
+
 End program 
 
 ![Image of program end](images/end_program.png)
