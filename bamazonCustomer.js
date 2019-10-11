@@ -74,15 +74,15 @@ function purchase() {
                 // console.log(res[i]);
                 // console.log(res[i].id);
                 if (parseInt(chosenItem) === res[i].id) {
-                     item = res[i]
+                    item = res[i]
                 }
-            } 
-            if(item){
+            }
+            if (item) {
                 var stock = item.stock_quantity;
                 var price = item.price;
                 // console.log(stock);
                 // console.log(chosenItem);
-                
+
                 if (quantity <= stock) {
                     console.log("Order fulfilled")
                     connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?", [quantity, chosenItem],
@@ -96,19 +96,19 @@ function purchase() {
                             startover();
 
                         })
-            }
-        
-           
-            else {
-                console.log("sorry not enough in stock")
+                }
 
-            }
-        
+
+                else {
+                    console.log("sorry not enough in stock")
+
+                }
+
             } else {
                 console.log("Please select a valid product ID")
                 startover();
             }
-            
+
         })
 
     })
@@ -119,22 +119,22 @@ function purchase() {
 function startover() {
     inquirer.prompt([
         {
-             type: "confirm",
+            type: "confirm",
             name: "startover",
             message: "Would you like to purchase something else?",
         },
 
-    ]).then(function(answer){
-        
-        if (answer === "true") {
-            displayProducts() 
-            
+    ]).then(function (answer) {
+
+
+        if (answer.startover === true) {
+
+            displayProducts()
         }
         else {
             connection.end()
             console.log("Have a good day!");
-           
-        } 
+
+        }
     });
 }
-  
